@@ -1,28 +1,54 @@
 package com.example.myapplication2.app;
 
+import android.location.Location;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesClient;
+import com.google.android.gms.location.LocationClient;
+import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.*;
 
-public class MapsActivity extends FragmentActivity {
+public class MapsActivity extends FragmentActivity implements GooglePlayServicesClient.ConnectionCallbacks, GooglePlayServicesClient.OnConnectionFailedListener {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
-
+    private LocationClient mlocc;
+    private MarkerOptions me;
+    private TileOverlay to;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         setUpMapIfNeeded();
         mMap.setMyLocationEnabled(true);
+        //connect();
 
-        mMap.addMarker(new MarkerOptions()
-                .position( /*oscars magic*/ )
-                        .icon(BitmapDescriptorFactory.fromResource(R.raw.tank)));
+        mlocc = new LocationClient(this,this,this);
+        mlocc.connect();
+        /*
+        TileProvider tp=new TileProvider() {
+            @Override
+            public Tile getTile(int i, int i1, int i2) {
+                return null;
+            }
+        };
+        to= mMap.addTileOverlay(new TileOverlayOptions().tileProvider(tp));
+
+        class update implements LocationListener{
+
+
+             @Override
+             public void onLocationChanged(Location location) {
+                 Location cur = mlocc.getLastLocation();
+                 to.remove();
+                 me= new MarkerOptions().position(new LatLng(cur.getLatitude(),cur.getLongitude())).icon(BitmapDescriptorFactory.fromResource(R.raw.tank));
+                 mMap.addMarker(me);
+
+             }
+         }*/
 
     }
 
@@ -31,6 +57,8 @@ public class MapsActivity extends FragmentActivity {
         super.onResume();
         setUpMapIfNeeded();
     }
+
+
 
     /**
      * Sets up the map if it is possible to do so (i.e., the Google Play services APK is correctly
@@ -68,5 +96,27 @@ public class MapsActivity extends FragmentActivity {
      */
     private void setUpMap() {
         mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
+    }
+
+    @Override
+    public void onConnected(Bundle bundle) {
+        Location cur;
+
+
+        cur = mlocc.getLastLocation();
+        mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(cur.getLatitude(),cur.getLongitude()))
+                .icon(BitmapDescriptorFactory.fromResource(R.raw.tank)));
+
+    }
+
+    @Override
+    public void onDisconnected() {
+
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+
     }
 }
