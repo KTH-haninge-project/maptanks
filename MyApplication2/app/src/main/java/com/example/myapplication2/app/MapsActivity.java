@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -17,6 +18,10 @@ public class MapsActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         setUpMapIfNeeded();
+        mMap.setMyLocationEnabled(true);
+        mMap.addMarker(new MarkerOptions()
+                .position(LatLng(coordinates))
+                .icon(BitmapDescriptorFactory.fromBitmap()));;
     }
 
     @Override
