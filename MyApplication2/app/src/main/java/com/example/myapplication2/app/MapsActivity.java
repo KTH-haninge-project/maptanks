@@ -19,9 +19,11 @@ public class MapsActivity extends FragmentActivity {
         setContentView(R.layout.activity_maps);
         setUpMapIfNeeded();
         mMap.setMyLocationEnabled(true);
+
         mMap.addMarker(new MarkerOptions()
-                .position(LatLng(coordinates))
-                .icon(BitmapDescriptorFactory.fromBitmap()));;
+                .position( /*oscars magic*/ )
+                        .icon(BitmapDescriptorFactory.fromResource(R.raw.tank)));
+
     }
 
     @Override
