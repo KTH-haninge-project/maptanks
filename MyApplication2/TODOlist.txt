@@ -1,0 +1,9 @@
+correct display of usertank
+
+update position of user
+
+output enemy objects (tanks, position)
+
+aim and fire
+
+startscreen
