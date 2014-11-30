@@ -12,6 +12,9 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class MapsActivity extends FragmentActivity implements GooglePlayServicesClient.ConnectionCallbacks, GooglePlayServicesClient.OnConnectionFailedListener {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
@@ -28,13 +31,24 @@ public class MapsActivity extends FragmentActivity implements GooglePlayServices
 
         mlocc = new LocationClient(this,this,this);
         mlocc.connect();
-        /*
-        TileProvider tp=new TileProvider() {
+        //*
+        TileProvider tp= new TileProvider() {
+            private final int max =10;
+            private Arrays[][][] tiles;
+
+            //public TileProvider(){
+            //    tiles=new Arrays[max][max][max];
+            //}
+
             @Override
             public Tile getTile(int i, int i1, int i2) {
+
                 return null;
+                //return tiles[i][i1][i2];
             }
         };
+
+
         to= mMap.addTileOverlay(new TileOverlayOptions().tileProvider(tp));
 
         class update implements LocationListener{
@@ -48,7 +62,8 @@ public class MapsActivity extends FragmentActivity implements GooglePlayServices
                  mMap.addMarker(me);
 
              }
-         }*/
+         }
+        //*/
 
     }
 
@@ -95,7 +110,8 @@ public class MapsActivity extends FragmentActivity implements GooglePlayServices
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
     private void setUpMap() {
-        mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
+
+        //mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
     }
 
     @Override
@@ -106,7 +122,7 @@ public class MapsActivity extends FragmentActivity implements GooglePlayServices
         cur = mlocc.getLastLocation();
         mMap.addMarker(new MarkerOptions()
                 .position(new LatLng(cur.getLatitude(),cur.getLongitude()))
-                .icon(BitmapDescriptorFactory.fromResource(R.raw.tank)));
+                .icon(BitmapDescriptorFactory.fromResource(R.raw.tankv2)));
 
     }
 

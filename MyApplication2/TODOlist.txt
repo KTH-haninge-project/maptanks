@@ -2,6 +2,8 @@ correct display of usertank
 
 update position of user
 
+private game overlay? over map instead of adding stuff to map, put them in their own layer and makes aiming and updateing easier
+
 output enemy objects (tanks, position)
 
 aim and fire
