@@ -1,4 +1,4 @@
-package com.example.myapplication2.app;
+package com.exyr.maptanks.app;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

@@ -1,4 +1,4 @@
-package com.example.myapplication2.app;
+package com.exyr.maptanks.app;
 
 import android.location.Location;
 import android.support.v4.app.FragmentActivity;
@@ -12,7 +12,6 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.*;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class MapsActivity extends FragmentActivity implements GooglePlayServicesClient.ConnectionCallbacks, GooglePlayServicesClient.OnConnectionFailedListener {
